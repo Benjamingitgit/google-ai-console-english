@@ -17,3 +17,5 @@ The maintainer was already signed into the Google account on a phone and approve
 ## What it took to get this working
 
 Our first attempt got stuck reporting that the batch queue was already running. A Windows console encoding issue could leave the queue marked as running after a logging failure; the queue now clears its flag when startup fails. We also encountered a port conflict from an older hidden server, so the launcher uses port 18765. Finally, the original sign-in flow switched away from the Google phone prompt too quickly. This version waits up to five minutes for phone approval and stops if sign-in remains incomplete. These fixes helped our attempt; other setups can fail for different reasons.
+
+Google also temporarily limited sign-in after too many attempts on the same account. In our case, waiting about 10 minutes before trying again helped. The required wait can vary.
